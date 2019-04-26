@@ -7,18 +7,16 @@ import javax.persistence.*;
 public class Person {
 
     @Id
-    @GeneratedValue(strategy = GenerationType.AUTO)
+    @GeneratedValue(strategy = GenerationType.IDENTITY)
     @Column(name = "id",nullable = false)
     private int id;
     @Column(name = "name",nullable = false)
     private String name;
-    @Column(name = "lastname",nullable = false)
-    private String lastName;
+    @Column(name = "surname",nullable = false)
+    private String surname;
     @Column(name = "phone",nullable = false)
     private int phone_number;
-    @Column(name = "place",nullable = false)
-    private String place;
-    @Column(name = "email", nullable = false)
+    @Column(name = "email", nullable = false, unique = true)
     private String email;
     @Column(name = "password",nullable = false)
     private String password;
@@ -43,12 +41,12 @@ public class Person {
         this.name = name;
     }
 
-    public String getLastName() {
-        return lastName;
+    public String getSurname() {
+        return surname;
     }
 
-    public void setLastName(String lastName) {
-        this.lastName = lastName;
+    public void setSurname(String surname) {
+        this.surname = surname;
     }
 
     public int getPhone_number() {
@@ -57,14 +55,6 @@ public class Person {
 
     public void setPhone_number(int phone_number) {
         this.phone_number = phone_number;
-    }
-
-    public String getPlace() {
-        return place;
-    }
-
-    public void setPlace(String place) {
-        this.place = place;
     }
 
     public String getEmail() {

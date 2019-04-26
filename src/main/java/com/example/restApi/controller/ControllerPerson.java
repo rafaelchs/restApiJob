@@ -8,13 +8,16 @@ import org.springframework.web.bind.annotation.*;
 import java.util.List;
 
 @RestController
+@RequestMapping("person/")
 public class ControllerPerson {
 
     @Autowired
     private PersonService service;
+    private Boolean message;
+
 
     @PostMapping
-    @RequestMapping("/add")
+    @RequestMapping("add")
     public void insert_person(@RequestBody Person objPerson){
 
         service.add(objPerson);
@@ -22,7 +25,7 @@ public class ControllerPerson {
     }
 
     @PutMapping
-    @RequestMapping("/update")
+    @RequestMapping("update")
     public void update_person(@RequestBody Person objPerson){
 
         service.update(objPerson);
@@ -35,9 +38,25 @@ public class ControllerPerson {
     }
 
     @GetMapping
-    @RequestMapping("/show")
+    @RequestMapping("show")
     public List<Person> findAll(){
 
         return service.list();
     }
+
+    @GetMapping(value = "login/{email}/{password}")
+    public Boolean search_account(@PathVariable("email") String email,@PathVariable("password") String password){
+
+         message = this.service.seek_account(email,password);
+
+         if (message.equals(true)){
+
+             return true;
+
+         }else {
+
+             return false;
+         }
+    }
+
 }
